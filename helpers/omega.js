@@ -69,6 +69,24 @@ class omegaClass {
             });
     }
 
+    async getImage(ProductId,file_name) {
+        const response =  await axios.post(`https://public.omega.page/public/api/v1.0/product/image`, {ProductId, "Number": 1,
+            Key: this.key
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }, responseType: 'stream'
+        })
+        const writer = fs.createWriteStream(file_name);
+        response.data.pipe(writer);
+
+        await new Promise((resolve, reject) => {
+            writer.on('finish', resolve);
+            writer.on('error', reject);
+        });
+        console.log('File downloaded successfully!');
+    }
+
     async waitInSeconds(seconds) {
         if (this.logging) console.log(`The script will wait ${seconds} seconds`)
         return new Promise((resolve) => {
