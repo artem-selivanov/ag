@@ -14,7 +14,7 @@ const local_path=test?"":"/home/a_dmin/ag/";
         //console.log(image.productid)
         await o.getImage(image.productid,`${local_path}${image.sku}.jpg`)
         //console.log(file)
-        await o.waitInSeconds(10);
+        //await o.waitInSeconds(10);
     }
 })()
 
