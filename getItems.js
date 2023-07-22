@@ -6,9 +6,10 @@ const m = new mysqlHandler(bd);
 
 
 (async function () {
-    const items = await m.getSet(`SELECT *
+    await m.executeRow(`TRUNCATE TABLE horoshop`)
+/*    const items = await m.getSet(`SELECT *
                                   FROM \`horoshop\``, "sku")
-    await h.init()
+*/    await h.init()
     let result
     let start = 0
     while (true) {
