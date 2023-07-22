@@ -21,7 +21,7 @@ const m = new mysqlHandler(bd);
         start += 500
         console.log(result)
         console.log(result[0].brand.ru)
-        break;
+//        break;
         if (result.length < 500) break;
     }
 
