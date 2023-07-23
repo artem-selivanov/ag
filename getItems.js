@@ -16,11 +16,11 @@ const m = new mysqlHandler(bd);
         result = await h.getItems(start)
         if (result == null) break;
         if (result.length > 0)
-            await m.insertRows(`INSERT INTO horoshop (sku, brand, availability, quantity, price)
-                                VALUES ?`, result.map(item => [item.article, item.brand.value?.ru||"", item.presence.id == 2 ? 0 : 1, item.quantity, item.price]))
+            await m.insertRows(`INSERT INTO horoshop (sku, brand,  cat, availability, quantity, price)
+                                VALUES ?`, result.map(item => [item.article, item.brand.value?.ru||"", item.parent?.value||"", item.presence.id == 2 ? 0 : 1, item.quantity, item.price]))
         start += 500
         console.log(result)
-        console.log(result[0].brand.ru)
+        //console.log(result[0].brand.ru)
 //        break;
         if (result.length < 500) break;
     }

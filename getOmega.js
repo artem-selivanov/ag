@@ -6,7 +6,7 @@ const readline = require('readline');
 const omegaClass = require('./helpers/omega');
 const SheetHandler = require('./helpers/spreadsheet');
 const xlsx = require('node-xlsx');
-const test = true;
+const test = false;
 
 const sheet_id = "1AnBG1h6JT8BloHNvtYiJsdCQnXuc0J6ti7yVm1hpH2Y"
 
@@ -87,9 +87,10 @@ const file_xls = 'ExcelPriceCISAvailabilityApi.xls';
 
 
     if (test) console.log(add[0])
-    console.log(`Товаров на добавление ${add.length}`)
-    console.log(`Товаров на обновленние ${presence.length}`)
-    console.log(`Товаров на добавление картинок ${images.length}`)
+    //console.log(availability)
+    console.log(`Добавление товаров ${add.length}, обновление цены ${price.length}, изменение наличия ${availability.length}`)
+    console.log(`Товаров на добавление картинок: ${images.length}`)
+
     if (!test) {
         await o.deleteFile(file_csv)
         await o.deleteFile(file_xls)

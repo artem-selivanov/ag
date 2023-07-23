@@ -128,7 +128,7 @@ class omegaClass {
             const fields = row.split("|")
             let obj = {}
             fields.map((v, i) => (obj[caption[i]] = v))
-            obj.price = (100 + price) * parseFloat(obj.CENAPART) / 100
+            obj.price = parseInt((100 + price) * parseFloat(obj.CENAPART) / 100)
 
             if (items[obj.KART]) {
                 if (items[obj.KART].availability != obj.STOCK) presense.push(obj)

@@ -4,7 +4,7 @@ const {settings, bd} = require('./settings');
 const h = new horoshopClass(settings);
 const m = new mysqlHandler(bd);
 
-const count = 500;
+const count = 1000;
 
 (async function () {
     let timeout = await m.getArr(`SELECT *
