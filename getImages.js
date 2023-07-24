@@ -6,7 +6,7 @@ const test = false;
 const o = new omegaClass(omega);
 const m = new mysqlHandler(bd);
 const local_path=test?"":"/var/www/html/images/";
-const url = "https://app.vostokzapchast.com.ua/";
+const url = "https://app.vostokzapchast.com.ua/images/";
 const count_files = 3;//20
 
 (async function () {
