@@ -11,7 +11,7 @@ const count_files = 3;//20
 
 (async function () {
     const images = await m.getArr(`SELECT *
-                                        FROM \`images\` limit 0,5`)
+                                        FROM \`images\` limit 0,20`)
     const result = []
     for (let image of images) {
         //console.log(image.productid)
@@ -26,9 +26,9 @@ const count_files = 3;//20
         //await o.waitInSeconds(10);
     }
 
-    /*await m.executeRow(`UPDATE \`images\`
+    await m.executeRow(`UPDATE \`images\`
                             SET status="1"
-                            WHERE id in (${images.map(i=>i.id).join(", ")})`)*/
+                            WHERE id in (${images.map(i=>i.id).join(", ")})`)
 
     if (result.length > 0)
         await m.insertRows(`INSERT INTO queue (sku, \`type\`, horoshop)
