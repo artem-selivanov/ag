@@ -25,7 +25,7 @@ const count_files = 20;//20
         //console.log(file)
         //await o.waitInSeconds(10);
     }
-
+    if(i.length>0)
     await m.executeRow(`UPDATE \`images\`
                             SET status="1"
                             WHERE id in (${images.map(i=>i.id).join(", ")})`)
