@@ -7,11 +7,11 @@ const o = new omegaClass(omega);
 const m = new mysqlHandler(bd);
 const local_path=test?"":"/var/www/html/images/";
 const url = "https://app.vostokzapchast.com.ua/images/";
-const count_files = 3;//20
+const count_files = 20;//20
 
 (async function () {
     const images = await m.getArr(`SELECT *
-                                        FROM \`images\` limit 0,20`)
+                                        FROM \`images\` limit 0,${count_files}`)
     const result = []
     for (let image of images) {
         //console.log(image.productid)
