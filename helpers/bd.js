@@ -68,7 +68,7 @@ class MysqlHandler {
         if (this.conn == null) await this.initMysql();
 
         const [res, fields] = await this.conn.query(query, [data], function (err, results, fields){})
-        console.log(res.insertId)
+        //console.log(res.insertId)
 
 
         if (disconnect) {

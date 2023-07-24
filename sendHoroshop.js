@@ -43,7 +43,7 @@ const count = 1000;
             break
         }
         //break
-        console.log(response.response)
+        //console.log(response.response)
 
         if (type == "item")
             response.response.log.map(i => (console.log(i.info)))

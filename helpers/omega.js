@@ -109,6 +109,7 @@ class omegaClass {
         const result = []
         const prices = []
         const presense = []
+        const skus= []
         const stream = fs.createReadStream(csvFilePath).pipe(iconv.decodeStream('cp1251'));
 
         //console.log('here1')
@@ -122,16 +123,17 @@ class omegaClass {
             lines.push(line)
             //console.log(line);
         }
-        console.log(lines.length)
+        console.log(`Позицій в CSV файл: ${lines.length}`)
         const caption = lines.shift().split("|")
         for (let row of lines) {
             const fields = row.split("|")
             let obj = {}
             fields.map((v, i) => (obj[caption[i]] = v))
+            skus.push(obj.KART);
             obj.price = parseInt((100 + price) * parseFloat(obj.CENAPART) / 100)
 
             if (items[obj.KART]) {
-                if (items[obj.KART].availability != obj.STOCK) presense.push(obj)
+                if (items[obj.KART].quantity != obj.STOCK) presense.push(obj)
                 if (items[obj.KART].price != obj.price) prices.push(obj)
                 continue
             }
@@ -141,7 +143,9 @@ class omegaClass {
             //obj.cat = cats[obj.KART]
             result.push(obj)
         }
-        //console.log(result)
+
+        const test=(Object.values(items)).filter(i=>i.cat!="Акции"&&parseInt(i.quantity)!=0&&skus.indexOf(i.sku)==-1).map(i=>presense.push({KART:i.sku, STOCK:0}))
+        console.log(`На виключення ${test.length}`)
         //console.log({result, update})
         return {add: result, price:prices, availability:presense}
         //console.log('CSV file processing complete.');

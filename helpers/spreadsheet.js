@@ -11,10 +11,10 @@ class SheetHandler {
     async initSheet() {
         if (this.api != null) return
         const sheet_cl = new google.auth.GoogleAuth({
-            credentials: {
+           /* credentials: {
                 private_key: this.keys.private_key,
                 client_email: this.keys.client_email,
-            },
+            },*/
             scopes: [
                 'https://www.googleapis.com/auth/spreadsheets',
             ],
