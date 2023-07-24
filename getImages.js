@@ -7,7 +7,7 @@ const o = new omegaClass(omega);
 const m = new mysqlHandler(bd);
 const local_path=test?"":"/var/www/html/images/";
 const url = "https://app.vostokzapchast.com.ua/images/";
-const count_files = 20;//20
+const count_files = 15;//20
 
 (async function () {
     const images = await m.getArr(`SELECT *
