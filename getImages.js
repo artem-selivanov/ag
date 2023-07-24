@@ -7,7 +7,7 @@ const o = new omegaClass(omega);
 const m = new mysqlHandler(bd);
 const local_path=test?"":"/var/www/html/images/";
 const url = "https://app.vostokzapchast.com.ua/images/";
-const count_files = 20;//20
+const count_files = 10;//20
 
 (async function () {
     const images = await m.getArr(`SELECT *
@@ -25,7 +25,7 @@ const count_files = 20;//20
         //console.log(file)
         //await o.waitInSeconds(10);
     }
-    if(i.length>0)
+    if(images.length>0)
     await m.executeRow(`UPDATE \`images\`
                             SET status="1"
                             WHERE id in (${images.map(i=>i.id).join(", ")})`)
