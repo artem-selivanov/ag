@@ -12,6 +12,7 @@ const count_files = 10;//20
 (async function () {
     const images = await m.getArr(`SELECT *
                                         FROM \`images\` where status="0" limit 0,${count_files}`)
+    if (images.length==0) return
     const result = []
     for (let image of images) {
         //console.log(image.productid)
@@ -25,7 +26,6 @@ const count_files = 10;//20
         //console.log(file)
         //await o.waitInSeconds(10);
     }
-    if(images.length>0)
     await m.executeRow(`UPDATE \`images\`
                             SET status="1"
                             WHERE id in (${images.map(i=>i.id).join(", ")})`)
