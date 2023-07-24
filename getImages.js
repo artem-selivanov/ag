@@ -11,7 +11,7 @@ const count_files = 20;//20
 
 (async function () {
     const images = await m.getArr(`SELECT *
-                                        FROM \`images\` limit 0,${count_files}`)
+                                        FROM \`images\` where status="0" limit 0,${count_files}`)
     const result = []
     for (let image of images) {
         //console.log(image.productid)
