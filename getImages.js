@@ -20,7 +20,11 @@ const count_files = 20;//20
 
         console.log(`Work with ${image.sku}`)
         const status = await o.getImage(image.productid,`${local_path}${image.sku}.jpg`)
-        if (!status) continue
+        if (!status) {
+            await m.executeRow(`UPDATE \`images\`
+                            SET status="2"
+                            WHERE id=${image.id}`)
+            continue}
         result.push({"article": image.sku, "images": {
                 "override": false,
                 "links": [
