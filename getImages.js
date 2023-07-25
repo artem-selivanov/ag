@@ -32,7 +32,7 @@ const count_files = 10;//20
         {
             console.log(e)
         }
-        await o.waitInSeconds(2);
+        await o.waitInSeconds(5);
     }
     await m.executeRow(`UPDATE \`images\`
                             SET status="1"
