@@ -101,8 +101,10 @@ class omegaClass {
             });
 
             console.log('File downloaded successfully!');
+            return true
         } catch (error) {
-            console.error('Error while fetching and saving image:', error);
+            console.error('Error while fetching and saving image');
+            return false
         }
     }
 

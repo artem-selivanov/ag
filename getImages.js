@@ -17,9 +17,10 @@ const count_files = 10;//20
     const item_ids=[]
     for (let image of images) {
         //console.log(image.productid)
-        try{
-        await o.getImage(image.productid,`${local_path}${image.sku}.jpg`)
+
         console.log(`Work with ${image.sku}`)
+        const status = await o.getImage(image.productid,`${local_path}${image.sku}.jpg`)
+        if (!status) continue
         result.push({"article": image.sku, "images": {
                 "override": false,
                 "links": [
@@ -28,10 +29,7 @@ const count_files = 10;//20
             }})
             item_ids.push(image.id)
         //console.log(file)
-        } catch (e)
-        {
-            console.log(`Image not found`)
-        }
+
         await o.waitInSeconds(5);
     }
     await m.executeRow(`UPDATE \`images\`
