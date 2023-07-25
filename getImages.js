@@ -14,8 +14,10 @@ const count_files = 10;//20
                                         FROM \`images\` where status="0" limit 0,${count_files}`)
     if (images.length==0) return
     const result = []
+    const item_ids=[]
     for (let image of images) {
         //console.log(image.productid)
+        try{
         await o.getImage(image.productid,`${local_path}${image.sku}.jpg`)
         console.log(`Work with ${image.sku}`)
         result.push({"article": image.sku, "images": {
@@ -24,7 +26,12 @@ const count_files = 10;//20
                     `${url}${image.sku}.jpg`,
                 ]
             }})
+            item_ids.push(image.id)
         //console.log(file)
+        } catch (e)
+        {
+            console.log(e)
+        }
         await o.waitInSeconds(2);
     }
     await m.executeRow(`UPDATE \`images\`
