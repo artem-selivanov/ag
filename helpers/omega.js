@@ -69,22 +69,41 @@ class omegaClass {
             });
     }
 
-    async getImage(ProductId,file_name) {
-        const response =  await axios.post(`https://public.omega.page/public/api/v1.0/product/image`, {ProductId, "Number": 1,
-            Key: this.key
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-            }, responseType: 'stream'
-        })
-        const writer = fs.createWriteStream(file_name);
-        response.data.pipe(writer);
+    async getImage(ProductId, file_name) {
+        try {
+            const response = await axios.post(
+                `https://public.omega.page/public/api/v1.0/product/image`,
+                {
+                    ProductId,
+                    Number: 1,
+                    Key: this.key,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    responseType: 'stream',
+                }
+            );
 
-        await new Promise((resolve, reject) => {
-            writer.on('finish', resolve);
-            writer.on('error', reject);
-        });
-        console.log('File downloaded successfully!');
+            // Ensure that the response status is 200 (OK) before proceeding
+            if (response.status !== 200) {
+                throw new Error('Failed to fetch image. Status: ' + response.status);
+            }
+
+            const writer = fs.createWriteStream(file_name);
+
+            response.data.pipe(writer);
+
+            await new Promise((resolve, reject) => {
+                writer.on('finish', resolve);
+                writer.on('error', reject);
+            });
+
+            console.log('File downloaded successfully!');
+        } catch (error) {
+            console.error('Error while fetching and saving image:', error);
+        }
     }
 
     async waitInSeconds(seconds) {
