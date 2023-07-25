@@ -25,7 +25,7 @@ const count_files = 10;//20
                 ]
             }})
         //console.log(file)
-        //await o.waitInSeconds(10);
+        await o.waitInSeconds(2);
     }
     await m.executeRow(`UPDATE \`images\`
                             SET status="1"
