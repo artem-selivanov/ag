@@ -7,7 +7,7 @@ const o = new omegaClass(omega);
 const m = new mysqlHandler(bd);
 const local_path=test?"":"/var/www/html/images/";
 const url = "https://app.vostokzapchast.com.ua/images/";
-const count_files = 10;//20
+const count_files = 1;//20
 
 (async function () {
     const images = await m.getArr(`SELECT *
@@ -17,6 +17,7 @@ const count_files = 10;//20
     for (let image of images) {
         //console.log(image.productid)
         await o.getImage(image.productid,`${local_path}${image.sku}.jpg`)
+        console.log(`Work with ${image.sku}`)
         result.push({"article": image.sku, "images": {
                 "override": false,
                 "links": [
