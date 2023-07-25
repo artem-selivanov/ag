@@ -30,13 +30,13 @@ const count_files = 10;//20
         //console.log(file)
         } catch (e)
         {
-            console.log(e)
+            console.log(`Image not found`)
         }
         await o.waitInSeconds(5);
     }
     await m.executeRow(`UPDATE \`images\`
                             SET status="1"
-                            WHERE id in (${images.map(i=>i.id).join(", ")})`)
+                            WHERE id in (${item_ids.join(", ")})`)
 
     if (result.length > 0)
         await m.insertRows(`INSERT INTO queue (sku, \`type\`, horoshop)
