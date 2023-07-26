@@ -22,6 +22,7 @@ const file_xls = 'ExcelPriceCISAvailabilityApi.xls';
 (async function () {
     let cats = await s.getCats()
     const markup = await s.getMarkup()
+    const price_cats = await s.getCatsPrices()
     const horo_items = (await m.getArr(`SELECT *
                                         FROM \`horoshop\``)).reduce(
         (map, obj) => {
@@ -36,7 +37,7 @@ const file_xls = 'ExcelPriceCISAvailabilityApi.xls';
     }
     const workbook = xlsx.parse(file_xls);
     const cats2 = o.processXls(workbook.find(i => i.name == "ПрайсЛист").data, cats)
-    const {add, price, availability} = await o.processCSV(file_csv, cats2, horo_items, markup)
+    const {add, price, availability} = await o.processCSV(file_csv, cats2, horo_items, markup, price_cats)
 
     const will_send = []
     const presence = []

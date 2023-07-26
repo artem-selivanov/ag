@@ -125,7 +125,7 @@ class omegaClass {
             });
     }
 
-    async processCSV(csvFilePath, cats, items, price) {
+    async processCSV(csvFilePath, cats, items, price, price_cats) {
 //    const csvFilePath = 'CsvPriceGoodsNewApi.csv';
         const result = []
         const prices = []
@@ -151,6 +151,10 @@ class omegaClass {
             let obj = {}
             fields.map((v, i) => (obj[caption[i]] = v))
             skus.push(obj.KART);
+            if (cats[obj.KART] == null) continue
+            obj.cat=cats[obj.KART]
+
+            price = price_cats[obj.cat]?price_cats[obj.cat]:price
             obj.price = parseInt((100 + price) * parseFloat(obj.CENAPART) / 100)
 
             if (items[obj.KART]) {
@@ -159,8 +163,7 @@ class omegaClass {
                 continue
             }
 
-            if (cats[obj.KART] == null) continue
-            obj.cat=cats[obj.KART]
+
             //obj.cat = cats[obj.KART]
             result.push(obj)
         }

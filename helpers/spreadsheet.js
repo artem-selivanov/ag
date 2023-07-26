@@ -130,7 +130,18 @@ class SheetHandler {
         return parseInt(arr[0][1])
     }
 
-
+    async getMarkup(){
+        const arr = await this.getValues(this.sheet_id,"Наценка")
+        //console.log(arr)
+        return parseInt(arr[0][1])
+    }
+    async getCatsPrices(){
+        let obj = {}
+        const arr = await this.getValues(this.sheet_id,"Наценка по категории")
+        arr.shift()
+        arr.filter(row=>row[1]!=""&&row[1]!==undefined).map(i=>obj[i[0]]=parseFloat(i[1]))
+        return obj
+    }
 
 }
 
