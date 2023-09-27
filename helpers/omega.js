@@ -157,12 +157,14 @@ class omegaClass {
             price = price_cats[obj.cat]?price_cats[obj.cat]:price
             obj.price = parseInt((100 + price) * parseFloat(obj.CENAPART) / 100)
 
+
+
             if (items[obj.KART]) {
                 if (items[obj.KART].quantity != obj.STOCK) presense.push(obj)
                 if (items[obj.KART].price != obj.price) prices.push(obj)
                 continue
             }
-
+            if (obj.price == 0) continue
 
             //obj.cat = cats[obj.KART]
             result.push(obj)
